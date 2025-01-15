@@ -3,7 +3,7 @@
 "productName": "1v1.LOL",
 "productVersion": "3.800",
 "dataUrl": "rc.data.unityweb",
-"wasmCodeUrl": "https://drive.google.com/uc?id=1lj6p-QXXEZ_7-SZtBF8p7KHNEmRhn0zh",
+"wasmCodeUrl": "rc.wasm.code.unityweb",
 "wasmFrameworkUrl": "rc.wasm.framework.unityweb",
 "graphicsAPI": ["WebGL 2.0","WebGL 1.0"],
 "webglContextAttributes": {"preserveDrawingBuffer": false},
