@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .c-button {
+            min-width: 100%;
+            font-family: fantasy;
+            appearance: none;
+            border: 0;
+            border-color: #fff;
+            border-radius: 5px;
+            background: #000;
+            color: #fff;
+            padding: 0px 46px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .c-button:hover {
+            background: #808080;
+        }
+
+        .c-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 4px #cbd6ee;
+        }
+
+        .c-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <button id="loadButton" class="c-button">NEWER VERSION</button>
+
+    <script>
+        document.getElementById('loadButton').addEventListener('click', function() {
+            // Fetch the HTML content from the CDN link
+            fetch('https://cdn.jsdelivr.net/gh/rd-sa/database@main/1111.html')
+                .then(response => response.text())
+                .then(html => {
+                    // Open a new tab with about:blank URL
+                    const newTab = window.open('about:blank', '_blank');
+
+                    if (newTab) {
+                        // Set the styles for the body of the new tab to ensure full screen
+                        newTab.document.body.style.margin = '0'; // Remove default margin
+                        newTab.document.body.style.padding = '0'; // Remove default padding
+                        newTab.document.body.style.height = '100vh'; // Set body height to full viewport height
+                        newTab.document.body.style.display = 'flex'; // Use flex to ensure content fills the screen
+
+                        // Create an iframe element to hold the game
+                        const iframe = newTab.document.createElement('iframe');
+                        iframe.srcdoc = html;  // Use srcdoc to inject the HTML directly into the iframe
+                        iframe.style.position = 'absolute';  // Position the iframe absolutely to cover the screen
+                        iframe.style.top = '0';  // Ensure it starts from the top
+                        iframe.style.left = '0';  // Ensure it starts from the left
+                        iframe.style.width = '100vw';  // Set iframe width to 100% of the viewport
+                        iframe.style.height = '100vh';  // Set iframe height to 100% of the viewport
+                        iframe.style.border = 'none';  // Remove border
+
+                        // Append the iframe to the body of the new tab
+                        newTab.document.body.appendChild(iframe);
+
+                        // Optionally make the iframe fullscreen (if desired)
+                        iframe.requestFullscreen()
+                            .catch((error) => console.log('Fullscreen request failed:', error));
+                    } else {
+                        console.log('Popup blocked. Please allow popups and try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading HTML:', error);
+                    alert('Sorry, there was an error loading the game. Please try again later.');
+                });
+        });
+    </script>
+
+</body>
+</html>
